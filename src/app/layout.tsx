@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import Header from "@/components/Header";
-import { getUser } from "@/auth/server";
-import { Toaster } from "react-hot-toast";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Note } from "@prisma/client";
-import { prisma } from "@/db/prisma";
 import NoteProvider from "@/providers/NoteProvider";
+import { Toaster } from "react-hot-toast";
+import { getUser } from "@/auth/server";
+import { prisma } from "@/db/prisma";
+import { Note } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Cogniscribe",
@@ -43,13 +43,16 @@ export default async function RootLayout({
           <NoteProvider>
             <SidebarProvider>
               <AppSidebar user={user} notes={notes} />
-              <div className="flex min-h-screen flex-col bg-background">
+
+              <div className="flex min-h-screen w-full flex-col">
                 <Header user={user} />
+
                 <main className="flex flex-1 flex-col px-4 pt-10 xl:px-8">
                   {children}
                 </main>
               </div>
             </SidebarProvider>
+
             <Toaster />
           </NoteProvider>
         </ThemeProvider>

@@ -6,6 +6,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./DarkModeToggle";
 import LogOutButton from "./LogOutButton";
+import { SidebarTrigger } from "./ui/sidebar";
 
 function Header({ user }: { user: unknown }) {
   return (
@@ -15,6 +16,7 @@ function Header({ user }: { user: unknown }) {
         boxShadow: shadow,
       }}
     >
+      <SidebarTrigger className="absolute left-1 top-1" />
       {/* Logo */}
       <Link href="/" className="flex items-center">
         <Image
