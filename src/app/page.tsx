@@ -26,7 +26,7 @@ async function HomePage({ searchParams }: Props) {
       {/* Top button section */}
       <div className="flex w-full max-w-4xl justify-between items-center gap-4 md:flex-row flex-col">
         <NewNoteButton user={user} />
-        <AskAIButton user={user} />
+        <AskAIButton user={user} noteId={noteId} />
       </div>
 
       {/* Note Input Section */}

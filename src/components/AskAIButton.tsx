@@ -14,14 +14,15 @@ import { Fragment, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { Textarea } from "./ui/textarea";
 import { ArrowUpIcon } from "lucide-react";
-//import { askAIAboutNotesAction } from "@/actions/notes";
-//import "@/styles/ai-response.css";
+import { askAIAboutNotesAction } from "@/actions/note";
+import "@/styles/ai-response.css";
 
 type Props = {
   user: User | null;
+  noteId?: string;
 };
 
-function AskAIButton({ user }: Props) {
+function AskAIButton({ user, noteId }: Props) {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();
@@ -67,12 +68,20 @@ function AskAIButton({ user }: Props) {
     setQuestionText("");
     setTimeout(scrollToBottom, 100);
 
-    // startTransition(async () => {
-    //   const response = await askAIAboutNotesAction(newQuestions, responses);
-    //   setResponses((prev) => [...prev, response]);
+    startTransition(async () => {
+      console.log("Submitting question:", questionText);
+      const response = await askAIAboutNotesAction(
+        newQuestions,
+        responses,
+        noteId!
+      );
+      setResponses((prev) => [
+        ...prev,
+        typeof response === "string" ? response : JSON.stringify(response),
+      ]);
 
-    //   setTimeout(scrollToBottom, 100);
-    // });
+      setTimeout(scrollToBottom, 100);
+    });
   };
 
   const scrollToBottom = () => {
@@ -101,7 +110,7 @@ function AskAIButton({ user }: Props) {
         <DialogHeader>
           <DialogTitle>Ask AI About Your Notes</DialogTitle>
           <DialogDescription>
-            Out AI can answer questions about all of your notes
+            Our AI can answer questions about your notes
           </DialogDescription>
         </DialogHeader>
 
@@ -140,7 +149,10 @@ function AskAIButton({ user }: Props) {
             value={questionText}
             onChange={(e) => setQuestionText(e.target.value)}
           />
-          <Button className="ml-auto size-8 rounded-full">
+          <Button
+            className="ml-auto size-8 rounded-full"
+            onClick={handleSubmit}
+          >
             <ArrowUpIcon className="text-background" />
           </Button>
         </div>

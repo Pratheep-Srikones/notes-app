@@ -40,8 +40,8 @@ const SidebarGroupContent = ({ notes }: props) => {
     );
   };
   return (
-    <SidebarGroupContentShadCN>
-      <div className="relative flex items-center">
+    <SidebarGroupContentShadCN className="max-w-[150px] overflow-hidden text-accent-foregroundgit">
+      <div className="relative flex items-center max-w-[150px]">
         <SearchIcon className="absolute left-2 size-2" />
         <Input
           className="bg-muted pl-8"
