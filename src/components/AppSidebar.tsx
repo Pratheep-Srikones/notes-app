@@ -13,7 +13,7 @@ export function AppSidebar({ user, notes }: { user: unknown; notes: Note[] }) {
     <Sidebar className="mt-16">
       <SidebarContent className="custom-scrollbar">
         <SidebarGroup>
-          <SidebarGroupLabel className="my-2 text-lg">
+          <SidebarGroupLabel className="my-2 text-lg text-accent-foreground">
             {user ? (
               "Your Notes"
             ) : (
