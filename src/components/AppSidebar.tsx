@@ -15,9 +15,9 @@ export function AppSidebar({ user, notes }: { user: unknown; notes: Note[] }) {
         <SidebarGroup>
           <SidebarGroupLabel className="my-2 text-lg text-accent-foreground">
             {user ? (
-              "Your Notes"
+              <span className="text-accent-foreground">Your Notes</span>
             ) : (
-              <p>
+              <p className="text-accent-foreground">
                 <Link href={"/login"} className="underline">
                   Login
                 </Link>
